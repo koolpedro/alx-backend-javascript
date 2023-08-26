@@ -1,9 +1,21 @@
-const Utils = {
-  calculateNumber(type, a, b) {
-    if (type == 'SUM') return Math.round(a) + Math.round(b);
-    if (type == 'SUBTRACT') return Math.round(a) - Math.round(b);
-    if (type == 'DIVIDE') return Math.round(b) != 0 ? Math.round(a) / Math.round(b) : 'ERROR';
-  }
+function calculateNumber(type, a, b) {
+    const roundedA = Math.round(a);
+    const roundedB = Math.round(b);
+
+    if (type === 'SUM') {
+        return roundedA + roundedB;
+    } else if (type === 'SUBTRACT') {
+        return roundedA - roundedB;
+    } else if (type === 'DIVIDE') {
+        if (roundedB === 0) {
+            return 'Error';
+        }
+        return Math.round((a / b) * 100) / 100;
+    } else {
+        throw new Error('Invalid operation type');
+    }
 }
 
-module.exports = Utils;
+module.exports = {
+    calculateNumber
+};

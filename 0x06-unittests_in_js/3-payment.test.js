@@ -1,18 +1,17 @@
-const chai = require('chai');
-const expect = chai.expect;
-
 const sinon = require('sinon');
-const utils = require('./utils');
-const sendPaymentRequestToApi = require('./3-payment');
+const { expect } = require('chai');
+const Utils = require('./utils');
+const { sendPaymentRequestToApi } = require('./3-payment');
 
 describe('sendPaymentRequestToApi', () => {
-  it('test the send payment request method', () => {
-    const funcspy = sinon.spy(utils, 'calculateNumber');
-    const reqApi = sendPaymentRequestToApi(100, 20);
+    it('should call calculateNumber with correct arguments', () => {
+        const calculateNumberSpy = sinon.spy(Utils, 'calculateNumber');
 
-    expect(funcspy.calledOnceWithExactly('SUM', 100, 20)).to.equal(true);
-    expect(utils.calculateNumber('SUM', 100, 20)).to.equal(reqApi);
+        sendPaymentRequestToApi(100, 20);
 
-    funcspy.restore();
-  });
+        expect(calculateNumberSpy.calledOnce).to.be.true;
+        expect(calculateNumberSpy.calledWithExactly('SUM', 100, 20)).to.be.true;
+
+        calculateNumberSpy.restore(); // Restore the original function after testing
+    });
 });

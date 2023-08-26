@@ -4,16 +4,17 @@
   "description": "Basic test with Mocha and Node assertion library",
   "main": "0-calcul.js",
   "scripts": {
-    "test": "mocha 1-calcul.test.js"
+    "test": "mocha 2-calcul_chai.test.js"
   },
   "scripts": {
-    "test": "mocha 2-calcul_chai.test.js"
+    "test": "mocha 3-payment.test.js"
   },
   "author": "Peter",
   "license": "ISC",
   "devDependencies": {
     "assert": "^2.0.0",
     "chai": "^4.3.8",
-    "mocha": "^10.2.0"
+    "mocha": "^10.2.0",
+    "sinon": "^15.2.0"
   }
 }
