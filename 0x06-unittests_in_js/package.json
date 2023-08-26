@@ -15,6 +15,9 @@
   "scripts": {
     "test": "mocha 5-payment.test.js"
   },
+  "scripts": {
+    "test": "mocha 7-skip.test.js"
+  },
   "author": "Peter",
   "license": "ISC",
   "devDependencies": {
