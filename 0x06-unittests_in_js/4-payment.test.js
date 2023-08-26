@@ -1,22 +1,23 @@
-const chai = require('chai');
-const expect = chai.expect;
-
 const sinon = require('sinon');
-const utils = require('./utils');
-const sendPaymentRequestToApi = require('./4-payment');
+const { expect } = require('chai');
+const Utils = require('./utils');
+const { sendPaymentRequestToApi } = require('./4-payment'); // Adjust the path accordingly
 
 describe('sendPaymentRequestToApi', () => {
-  it('test the send payment request method', () => {
-    const funcstub = sinon.stub(utils, 'calculateNumber');
-    funcstub.returns(10);
+    it('should call calculateNumber with correct arguments and log message', () => {
+        // Create a stub for Utils.calculateNumber to always return 10
+        const calculateNumberStub = sinon.stub(Utils, 'calculateNumber').returns(10);
 
-    const reqApi = sendPaymentRequestToApi(100, 20);
-    const consolespy = sinon.spy(console, 'log');
+        const consoleLogSpy = sinon.spy(console, 'log'); // Spy on console.log
 
-    expect(consolespy.calledWithExactly('The total is: 10'));
-    expect(utils.calculateNumber('SUM', 100, 20)).to.equal(reqApi);
+        sendPaymentRequestToApi(100, 20);
 
-    funcstub.restore();
-    consolespy.restore();
-  });
+        // Verify the stub and spy behavior
+        expect(calculateNumberStub.calledOnceWithExactly('SUM', 100, 20)).to.be.true;
+        expect(consoleLogSpy.calledOnceWithExactly('The total is: 10')).to.be.true;
+
+        // Restore the stub and spy after testing
+        calculateNumberStub.restore();
+        consoleLogSpy.restore();
+    });
 });
