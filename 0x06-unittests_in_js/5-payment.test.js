@@ -1,31 +1,30 @@
-const chai = require('chai');
-const expect = chai.expect;
-
 const sinon = require('sinon');
-const sendPaymentRequestToApi = require('./5-payment');
+const { expect } = require('chai');
+const Utils = require('./utils');
+const { sendPaymentRequestToApi } = require('./5-payment'); // Adjust the path accordingly
 
 describe('sendPaymentRequestToApi', () => {
-  let consolespy;
+    let consoleLogSpy;
 
-  beforeEach(() => {
-    consolespy = sinon.spy(console, 'log');
-  });
-  afterEach(() => {
-    consolespy.restore();
-  });
+    beforeEach(() => {
+        consoleLogSpy = sinon.spy(console, 'log');
+    });
 
-  it('test the send Pyament Request with 100, 20', () => {
-    sendPaymentRequestToApi(100, 20);
+    afterEach(() => {
+        consoleLogSpy.restore();
+    });
 
-    expect(consolespy.calledWithExactly('The total is: 120')).to.be.true;
-    expect(consolespy.CalledOnce);
-  });
+    it('should log correct total for 100 and 20', () => {
+        sendPaymentRequestToApi(100, 20);
 
-  it('test the send Pyament Request with 10, 10', () => {
-    sendPaymentRequestToApi(10, 10);
+        expect(consoleLogSpy.calledOnce).to.be.true;
+        expect(consoleLogSpy.calledWithExactly('The total is: 120')).to.be.true;
+    });
 
-    expect(consolespy.calledOnceWithExactly('The total is: 20')).to.be.true;
-    expect(consolespy.CalledOnce);
-  });
+    it('should log correct total for 10 and 10', () => {
+        sendPaymentRequestToApi(10, 10);
 
+        expect(consoleLogSpy.calledOnce).to.be.true;
+        expect(consoleLogSpy.calledWithExactly('The total is: 20')).to.be.true;
+    });
 });

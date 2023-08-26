@@ -12,6 +12,9 @@
   "scripts": {
     "test": "mocha 4-payment.test.js"
   },
+  "scripts": {
+    "test": "mocha 5-payment.test.js"
+  },
   "author": "Peter",
   "license": "ISC",
   "devDependencies": {
