@@ -6,6 +6,9 @@
   "scripts": {
     "test": "mocha 0-calcul.test.js"
   },
+  "scripts": {
+    "test": "mocha 1-calcul.test.js"
+  },
   "author": "Peter",
   "license": "ISC",
   "devDependencies": {
