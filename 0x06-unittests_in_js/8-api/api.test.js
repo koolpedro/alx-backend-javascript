@@ -1,14 +1,20 @@
-const chai = require('chai');
-const expect = chai.expect;
 const request = require('request');
+const { expect } = require('chai');
 
-describe('test the API', () => {
-  it('test the API with status, body', (done) => {
-    request('http://localhost:7865', 'GET', (er, rs, bd) => {
-      if (er) throw er;
-      expect(rs.statusCode).to.equal(200);
-      expect(bd).to.equal('Welcome to the payment system');
-    });
-    done();
-  });
+describe('API Integration Test', () => {
+   const baseUrl = 'http://localhost:7865';
+
+   it('should return status code 200 and correct message', () => {
+       return new Promise((resolve, reject) => {
+           request.get(baseUrl, (error, response, body) => {
+               if (error) {
+                   reject(error);
+               } else {
+                   expect(response.statusCode).to.equal(200);
+                   expect(body).to.equal('Welcome to the payment system');
+                   resolve();
+               }
+           });
+       });
+   });
 });
